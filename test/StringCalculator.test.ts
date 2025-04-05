@@ -40,4 +40,12 @@ describe("StringCalculator : Addition", () => {
       "Negative number not allowed : -4"
     );
   });
+
+  it("All Negative numbers should return in message 'Negative numbers not allowed : <negative_numbers>'", () => {
+    let dynamicDelimeter: RegExp = /[,\n,|]/;
+    stringCalculator = new StringCalculator(dynamicDelimeter);
+    expect(stringCalculator.add("1,-4\n5,10|20,-6|5\n-9")).toBe(
+      "Negative numbers not allowed : -4,-6,-9"
+    );
+  });
 });
