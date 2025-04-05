@@ -29,6 +29,10 @@ export class StringCalculator {
     if (isNaN(parsedNum)) {
       throw new Error(`Invalid Input : ${num}`);
     }
+
+    if (parsedNum < 0) {
+      throw new Error(`Negative number not allowed : ${num}`);
+    }
     return parsedNum;
   }
 }
