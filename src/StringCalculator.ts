@@ -82,7 +82,7 @@ export class StringCalculator {
     if (responseHolder.isErrored) {
       let errorMessage = "";
       if (responseHolder.invalidNumbers) {
-        errorMessage += `Invalid input : ${responseHolder.invalidNumbers}`;
+        errorMessage += `Characters not allowed : ${responseHolder.invalidNumbers}`;
       }
       if (responseHolder.negativeNumbers) {
         if (responseHolder.invalidNumbers) errorMessage += " And ";

@@ -15,8 +15,8 @@ describe("StringCalculator : Addition", () => {
     expect(stringCalculator.add("1,4")).toBe(5);
   });
 
-  it("Invalid number in string should return 'Invalid input : <invalid_number>'", () => {
-    expect(stringCalculator.add("1,4,A")).toBe("Invalid input : A");
+  it("Invalid number in string should return 'Characters not allowed : <invalid_number>'", () => {
+    expect(stringCalculator.add("1,4,A")).toBe("Characters not allowed : A");
   });
 
   it("Should support \n as a delimeter", () => {
@@ -49,11 +49,11 @@ describe("StringCalculator : Addition", () => {
     );
   });
 
-  it("All Negative numbers and Invalid chars should return in message 'Negative numbers not allowed : <negative_numbers> AND Invalid input : <invalid_number>'", () => {
+  it("All Negative numbers and Invalid chars should return in message 'Characters not allowed : <> And Negative numbers not allowed : <>'", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
     stringCalculator = new StringCalculator(dynamicDelimeter);
     expect(stringCalculator.add("1,-4\n5,10|20,-6|5\n-9,A,8,3,Z")).toBe(
-      "Invalid input : A,Z And Negative numbers not allowed : -4,-6,-9"
+      "Characters not allowed : A,Z And Negative numbers not allowed : -4,-6,-9"
     );
   });
 });
