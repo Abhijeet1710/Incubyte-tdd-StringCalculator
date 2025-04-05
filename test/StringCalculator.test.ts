@@ -26,6 +26,6 @@ describe("StringCalculator : Addition", () => {
   it("Should support dynamic delimeters", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
     stringCalculator = new StringCalculator(dynamicDelimeter);
-    expect(stringCalculator.add("1,4\n5,10|20")).toBe(30);
+    expect(stringCalculator.add("1,4\n5,10|20")).toBe(40);
   });
 });

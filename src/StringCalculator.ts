@@ -1,7 +1,7 @@
 export class StringCalculator {
   private supportedDelimeters: RegExp;
-  constructor() {
-    this.supportedDelimeters = /[,\n]/;
+  constructor(delimeters?: RegExp) {
+    this.supportedDelimeters = delimeters ? delimeters : /[,\n]/;
   }
 
   public add(numbers: string): number | string {
