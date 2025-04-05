@@ -19,7 +19,7 @@ export class StringCalculator {
     return operator.operate(input);
   }
 
-  getStatsAddCalls(): number {
-    return this.statsTracker.getOperationCalls(OperationType.ADD);
+  getOperationCalls(operation: OperationType | null): number {
+    return this.statsTracker.getOperationCalls(operation);
   }
 }

@@ -15,7 +15,7 @@ export class StatsTracker {
     return this.totalCalls;
   }
 
-  getOperationCalls(op: OperationType): number {
-    return this.operationCalls[op];
+  getOperationCalls(op: OperationType | null): number {
+    return op ? this.operationCalls[op] : this.getTotalCalls();
   }
 }

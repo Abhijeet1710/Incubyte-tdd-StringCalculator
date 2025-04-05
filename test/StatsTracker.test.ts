@@ -9,7 +9,26 @@ describe("StatsTracker : Calculations", () => {
     stringCalculator = new StringCalculator(new StatsTracker());
   });
 
-  it("should return 0 for no calls so far", () => {
-    expect(stringCalculator.getStatsAddCalls()).toBe(0);
+  it("Should return 0 for no calls so far", () => {
+    expect(stringCalculator.getOperationCalls(OperationType.ADD)).toBe(0);
+  });
+
+  it("Should return n add calls, after calling calculate for ADD n times", () => {
+    stringCalculator.calculate("1,4", OperationType.ADD);
+    stringCalculator.calculate("1,4,5", OperationType.ADD);
+    stringCalculator.calculate("1,4\n10", OperationType.ADD);
+
+    expect(stringCalculator.getOperationCalls(OperationType.ADD)).toBe(3);
+  });
+
+  it("Should return n total calls, after calling calculate n times for any operation", () => {
+    stringCalculator.calculate("1,4", OperationType.ADD);
+    stringCalculator.calculate("1,4,5", OperationType.ADD);
+    stringCalculator.calculate("1,4\n10", OperationType.ADD);
+    stringCalculator.calculate("1,4", OperationType.ADD);
+    stringCalculator.calculate("1,4,5", OperationType.ADD);
+    stringCalculator.calculate("1,4\n10", OperationType.ADD);
+
+    expect(stringCalculator.getOperationCalls(null)).toBe(6);
   });
 });
