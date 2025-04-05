@@ -40,7 +40,6 @@ describe("StringCalculator : calculateition", () => {
 
   it("Should support dynamic delimeters", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
-    stringCalculator = new StringCalculator();
     expect(
       stringCalculator.calculate(
         "1,4\n5,10|20",
@@ -52,7 +51,6 @@ describe("StringCalculator : calculateition", () => {
 
   it("Negative numbers should return 'Negative number not allowed : <negative_number>'", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
-    stringCalculator = new StringCalculator();
     expect(
       stringCalculator.calculate(
         "1,-4\n5,10|20",
@@ -64,7 +62,6 @@ describe("StringCalculator : calculateition", () => {
 
   it("All Negative numbers should return in message 'Negative numbers not allowed : <negative_numbers>'", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
-    stringCalculator = new StringCalculator();
     expect(
       stringCalculator.calculate(
         "1,-4\n5,10|20,-6|5\n-9",
@@ -76,7 +73,6 @@ describe("StringCalculator : calculateition", () => {
 
   it("All Negative numbers and Invalid chars should return in message 'Characters not allowed : <> And Negative numbers not allowed : <>'", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
-    stringCalculator = new StringCalculator();
     expect(
       stringCalculator.calculate(
         "1,-4\n5,10|20,-6|5\n-9,A,8,3,Z",

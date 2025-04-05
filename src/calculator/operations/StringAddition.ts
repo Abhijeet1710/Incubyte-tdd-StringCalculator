@@ -83,8 +83,6 @@ export class StringAddition implements IStringOperation {
     responseHolder: ResponseHolderType,
     sum: number
   ): string | number {
-    console.log("responseHolder", responseHolder);
-
     if (!responseHolder.isErrored) return sum;
 
     let errorMessage = "";
