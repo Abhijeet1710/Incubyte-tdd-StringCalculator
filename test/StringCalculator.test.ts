@@ -1,3 +1,4 @@
+import { StatsTracker } from "../src/calculator/StatsTracker";
 import { StringCalculator } from "../src/calculator/StringCalculator";
 import { OperationType } from "../src/utils/Constants";
 
@@ -5,7 +6,7 @@ describe("StringCalculator : calculateition", () => {
   let stringCalculator: StringCalculator;
 
   beforeEach(() => {
-    stringCalculator = new StringCalculator();
+    stringCalculator = new StringCalculator(new StatsTracker());
   });
 
   it("should return 0 for an empty string", () => {
