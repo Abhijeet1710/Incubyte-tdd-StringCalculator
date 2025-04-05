@@ -14,4 +14,8 @@ describe("StringCalculator : Addition", () => {
   it("should return 5 for 1,4", () => {
     expect(stringCalculator.add("1,4")).toBe(5);
   });
+
+  it("Invalid number in string should return 'Invalid input' message with invalid number/input", () => {
+    expect(stringCalculator.add("1,4,A")).toBe("Invalid Input : A");
+  });
 });
