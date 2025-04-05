@@ -1,3 +1,8 @@
+import {
+  ResponseHolderType,
+  ValidateAndReturnResponseType,
+} from "./types/commonTypes";
+
 export class StringCalculator {
   private supportedDelimeters: RegExp;
   constructor(delimeters?: RegExp) {
@@ -6,33 +11,85 @@ export class StringCalculator {
 
   public add(numbers: string): number | string {
     let sum = 0;
+    let responseHolder: ResponseHolderType = { isErrored: false };
+
     if (numbers === "") {
       return sum;
     }
     try {
-      sum = numbers
-        .split(this.supportedDelimeters)
-        .reduce(
-          (additionTillNow, currNum) =>
-            additionTillNow + this.validateAndReturn(currNum),
-          0
-        );
+      const allNumbersToAdd: string[] = numbers.split(this.supportedDelimeters);
+
+      for (let number of allNumbersToAdd) {
+        const resp: ValidateAndReturnResponseType =
+          this.validateAndReturn(number);
+
+        if (
+          !resp.isInvalidIp &&
+          !resp.isNegative &&
+          !responseHolder.isErrored
+        ) {
+          sum += Number(resp.parsedNumber);
+        } else {
+          responseHolder.isErrored = true;
+          if (resp.isInvalidIp) {
+            if (!responseHolder.invalidNumbers) {
+              responseHolder.invalidNumbers = resp.invalidInput;
+            } else {
+              responseHolder.invalidNumbers += `,${resp.invalidInput}`;
+            }
+          }
+          if (resp.isNegative) {
+            if (!responseHolder.negativeNumbers) {
+              responseHolder.negativeNumbers = resp.negativeNumber;
+            } else {
+              responseHolder.negativeNumbers += `,${resp.negativeNumber}`;
+            }
+          }
+        }
+      }
+
+      return this.prepareFinalAnswer(responseHolder, sum);
     } catch (e: unknown) {
       return (e as Error).message;
     }
-
-    return sum;
   }
 
-  private validateAndReturn(num: string): number {
+  private validateAndReturn(num: string): ValidateAndReturnResponseType {
+    const resp: ValidateAndReturnResponseType = {};
+
     const parsedNum = Number(num);
+    resp.parsedNumber = parsedNum;
+
     if (isNaN(parsedNum)) {
-      throw new Error(`Invalid input : ${num}`);
+      resp.isInvalidIp = true;
+      resp.invalidInput = num;
     }
 
     if (parsedNum < 0) {
-      throw new Error(`Negative number not allowed : ${num}`);
+      resp.isNegative = true;
+      resp.negativeNumber = num;
     }
-    return parsedNum;
+
+    return resp;
+  }
+
+  private prepareFinalAnswer(
+    responseHolder: ResponseHolderType,
+    sum: number
+  ): string | number {
+    console.log("responseHolder", responseHolder);
+
+    if (responseHolder.isErrored) {
+      let errorMessage = "";
+      if (responseHolder.invalidNumbers) {
+        errorMessage += `Invalid input : ${responseHolder.invalidNumbers}`;
+      }
+      if (responseHolder.negativeNumbers) {
+        errorMessage += `Negative numbers not allowed : ${responseHolder.negativeNumbers}`;
+      }
+      return errorMessage;
+    }
+
+    return sum;
   }
 }

@@ -37,7 +37,7 @@ describe("StringCalculator : Addition", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
     stringCalculator = new StringCalculator(dynamicDelimeter);
     expect(stringCalculator.add("1,-4\n5,10|20")).toBe(
-      "Negative number not allowed : -4"
+      "Negative numbers not allowed : -4"
     );
   });
 
