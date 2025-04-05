@@ -7,6 +7,13 @@ export class StringCalculator {
       return sum;
     }
 
+    sum = numbers
+      .split(",")
+      .reduce(
+        (additionTillNow, currNum) => additionTillNow + parseInt(currNum),
+        0
+      );
+
     return sum;
   }
 }
