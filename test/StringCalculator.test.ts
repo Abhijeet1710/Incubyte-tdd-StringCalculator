@@ -6,7 +6,7 @@ describe("StringCalculator : calculateition", () => {
   let stringCalculator: StringCalculator;
 
   beforeEach(() => {
-    stringCalculator = new StringCalculator(new StatsTracker());
+    stringCalculator = StringCalculator.getInstance(new StatsTracker());
   });
 
   it("should return 0 for an empty string", () => {

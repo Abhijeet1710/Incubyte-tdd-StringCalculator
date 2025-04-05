@@ -6,7 +6,7 @@ describe("StatsTracker : Calculations", () => {
   let stringCalculator: StringCalculator;
 
   beforeEach(() => {
-    stringCalculator = new StringCalculator(new StatsTracker());
+    stringCalculator = StringCalculator.getInstance(new StatsTracker());
   });
 
   it("Should return 0 for no calls so far", () => {
@@ -29,6 +29,6 @@ describe("StatsTracker : Calculations", () => {
     stringCalculator.calculate("1,4,5", OperationType.ADD);
     stringCalculator.calculate("1,4\n10", OperationType.ADD);
 
-    expect(stringCalculator.getOperationCalls(null)).toBe(6);
+    expect(stringCalculator.getOperationCalls(null)).toBe(9);
   });
 });

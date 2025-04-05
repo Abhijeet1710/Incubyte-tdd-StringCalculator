@@ -3,9 +3,17 @@ import { OperationFactory } from "./OperationFactory";
 import { StatsTracker } from "./StatsTracker";
 
 export class StringCalculator {
-  statsTracker: StatsTracker;
-  constructor(statsTracker: StatsTracker) {
+  private static instance: StringCalculator;
+  private statsTracker: StatsTracker;
+
+  private constructor(statsTracker: StatsTracker) {
     this.statsTracker = statsTracker;
+  }
+
+  public static getInstance(statsTracker: StatsTracker): StringCalculator {
+    if (!StringCalculator.instance)
+      StringCalculator.instance = new StringCalculator(statsTracker);
+    return StringCalculator.instance;
   }
 
   calculate(
