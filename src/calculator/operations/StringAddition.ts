@@ -1,15 +1,15 @@
 import {
   ResponseHolderType,
   ValidateAndReturnResponseType,
-} from "./types/commonTypes";
+} from "../../types/commonTypes";
 
-export class StringCalculator {
+export class StringAddition implements IStringOperation {
   private supportedDelimeters: RegExp;
-  constructor(delimeters?: RegExp) {
-    this.supportedDelimeters = delimeters ? delimeters : /[,\n]/;
+  constructor(delimeters: RegExp) {
+    this.supportedDelimeters = delimeters;
   }
 
-  public add(numbers: string): number | string {
+  operate(numbers: string): string | number {
     let sum = 0;
     let responseHolder: ResponseHolderType = { isErrored: false };
 
@@ -75,10 +75,10 @@ export class StringCalculator {
   }
 
   /* Prepares the final answer on the basis of response holder.
-    If there are no errors, it returns the sum.
-    If there are errors, it returns the error message.
-    The error message is a combination of invalid numbers and negative numbers.
-   */
+      If there are no errors, it returns the sum.
+      If there are errors, it returns the error message.
+      The error message is a combination of invalid numbers and negative numbers.
+     */
   private prepareFinalAnswer(
     responseHolder: ResponseHolderType,
     sum: number
