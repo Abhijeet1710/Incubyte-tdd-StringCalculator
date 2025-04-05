@@ -1,5 +1,8 @@
 export class StringCalculator {
-  constructor() {}
+  private supportedDelimeters: RegExp;
+  constructor() {
+    this.supportedDelimeters = /[,\n]/;
+  }
 
   public add(numbers: string): number | string {
     let sum = 0;
@@ -8,7 +11,7 @@ export class StringCalculator {
     }
     try {
       sum = numbers
-        .split(",")
+        .split(this.supportedDelimeters)
         .reduce(
           (additionTillNow, currNum) =>
             additionTillNow + this.getNumber(currNum),
