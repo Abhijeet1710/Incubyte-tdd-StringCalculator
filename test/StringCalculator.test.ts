@@ -32,6 +32,12 @@ describe("StringCalculator : calculateition", () => {
     );
   });
 
+  it("Should support multiple duplicate delimeter", () => {
+    expect(
+      stringCalculator.calculate("1,,,,4\n\n\n,\n5", OperationType.ADD)
+    ).toBe(10);
+  });
+
   it("Should support dynamic delimeters", () => {
     let dynamicDelimeter: RegExp = /[,\n,|]/;
     stringCalculator = new StringCalculator();
