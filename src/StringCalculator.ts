@@ -14,7 +14,7 @@ export class StringCalculator {
         .split(this.supportedDelimeters)
         .reduce(
           (additionTillNow, currNum) =>
-            additionTillNow + this.getNumber(currNum),
+            additionTillNow + this.validateAndReturn(currNum),
           0
         );
     } catch (e: unknown) {
@@ -24,10 +24,10 @@ export class StringCalculator {
     return sum;
   }
 
-  private getNumber(num: string): number {
+  private validateAndReturn(num: string): number {
     const parsedNum = Number(num);
     if (isNaN(parsedNum)) {
-      throw new Error(`Invalid Input : ${num}`);
+      throw new Error(`Invalid input : ${num}`);
     }
 
     if (parsedNum < 0) {

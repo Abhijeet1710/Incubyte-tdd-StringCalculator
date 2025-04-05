@@ -16,7 +16,7 @@ describe("StringCalculator : Addition", () => {
   });
 
   it("Invalid number in string should return 'Invalid input : <invalid_number>'", () => {
-    expect(stringCalculator.add("1,4,A")).toBe("Invalid Input : A");
+    expect(stringCalculator.add("1,4,A")).toBe("Invalid input : A");
   });
 
   it("Should support \n as a delimeter", () => {
