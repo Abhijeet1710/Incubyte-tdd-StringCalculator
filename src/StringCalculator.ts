@@ -54,6 +54,7 @@ export class StringCalculator {
     }
   }
 
+  // Validates the number and returns the response object.
   private validateAndReturn(num: string): ValidateAndReturnResponseType {
     const resp: ValidateAndReturnResponseType = {};
 
@@ -73,24 +74,27 @@ export class StringCalculator {
     return resp;
   }
 
+  /* Prepares the final answer on the basis of response holder.
+    If there are no errors, it returns the sum.
+    If there are errors, it returns the error message.
+    The error message is a combination of invalid numbers and negative numbers.
+   */
   private prepareFinalAnswer(
     responseHolder: ResponseHolderType,
     sum: number
   ): string | number {
     console.log("responseHolder", responseHolder);
 
-    if (responseHolder.isErrored) {
-      let errorMessage = "";
-      if (responseHolder.invalidNumbers) {
-        errorMessage += `Characters not allowed : ${responseHolder.invalidNumbers}`;
-      }
-      if (responseHolder.negativeNumbers) {
-        if (responseHolder.invalidNumbers) errorMessage += " And ";
-        errorMessage += `Negative numbers not allowed : ${responseHolder.negativeNumbers}`;
-      }
-      return errorMessage;
-    }
+    if (!responseHolder.isErrored) return sum;
 
-    return sum;
+    let errorMessage = "";
+    if (responseHolder.invalidNumbers) {
+      errorMessage += `Characters not allowed : ${responseHolder.invalidNumbers}`;
+    }
+    if (responseHolder.negativeNumbers) {
+      if (responseHolder.invalidNumbers) errorMessage += " And ";
+      errorMessage += `Negative numbers not allowed : ${responseHolder.negativeNumbers}`;
+    }
+    return errorMessage;
   }
 }
